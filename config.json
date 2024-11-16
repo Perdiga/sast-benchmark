@@ -1,0 +1,197 @@
+{
+    "application": {
+        "filter_languages": ["JS_TS"],
+        "max_workers": 5,
+        "runners":[ 
+            {
+                "module_name": "domain.use_case.sonarqube_runner",
+                "class_name": "SonarQubeRunner"
+            },
+            {
+                "module_name": "domain.use_case.trivy_runner",
+                "class_name": "TrivyRunner"
+            },
+            {
+                "module_name": "domain.use_case.codeql_runner",
+                "class_name": "CodeQLRunner"
+            }
+        ]
+    },    
+    "repos": {
+        "vulnerable": {
+            "C_CPP": [
+                "https://github.com/hardik05/Damn_Vulnerable_C_Program",
+                "https://github.com/conikeec/seeve",
+                "https://github.com/atxsinn3r/VulnCases",
+                "https://github.com/patricia-gallardo/insecure-coding-examples",
+                "https://github.com/ongamse/shiftleft-c-demo"
+            ],
+            "CSharp": [
+                "https://github.com/appsecco/dvcsharp-api",
+                "https://github.com/zsusac/VulnerableCoreApp",
+                "https://github.com/ahmetak4n/vuln-netframework",
+                "https://github.com/HooliCorp/vulnerable_net_core",
+                "https://github.com/octodemo/advanced-security-csharp"
+            ],
+            "Go": [
+                "https://github.com/sonatype-nexus-community/intentionally-vulnerable-golang-project",
+                "https://github.com/0c34/govwa",
+                "https://github.com/golang/vulndb",
+                "https://github.com/Hardw01f/Vulnerability-goapp",
+                "https://github.com/Contrast-Security-OSS/go-test-bench",
+                "https://github.com/garethr/snykly",
+                "https://github.com/golang/vuln"
+            ],
+            "Java": [
+                "https://github.com/edu-secmachine/javulna",
+                "https://github.com/ScaleSec/vulnado",
+                "https://github.com/JoyChou93/java-sec-code",
+                "https://github.com/appsecco/dvja",
+                "https://github.com/CSPF-Founder/JavaVulnerableLab",
+                "https://github.com/DataDog/vulnerable-java-application"
+            ],
+            "Kotlin": [
+                "https://github.com/Checkmarx/Goatlin"
+            ],
+            "JS_TS": [
+                "https://github.com/cr0hn/vulnerable-node"
+            ],
+            "Python": [
+                "https://github.com/anil-yelken/Vulnerable-Flask-App",
+                "https://github.com/anil-yelken/Vulnerable-Soap-Service",
+                "https://github.com/fportantier/vulpy",
+                "https://github.com/anxolerd/dvpwa",
+                "https://github.com/sgabe/DSVPWA",
+                "https://github.com/xNaaro/vulnerable_python",
+                "https://github.com/adeyosemanputra/pygoat",
+                "https://github.com/nexB/vulnerablecode",
+                "https://github.com/Contrast-Security-OSS/vulnpy",
+                "https://github.com/ongamse/shiftleft-python-demo"
+            ],
+            "Ruby": [
+                "https://github.com/OWASP/railsgoat",
+                "https://github.com/whithajess/VulnerableRubyWebsite",
+                "https://github.com/spinkham/Hacme-Casino",
+                "https://github.com/ZeiJacks/r0uei",
+                "https://github.com/snyk-matt/ruby-goof"
+            ],
+            "Scala": [
+                "https://github.com/snyk/scala-woof",
+                "https://github.com/playframework/play-webgoat",
+                "https://github.com/jaroslawZawila/vulnerable-play",
+                "https://github.com/maltiyadav/scala-vulnerable-code"
+            ],
+            "PHP": [
+                "https://github.com/OWASP/OWASPWebGoatPHP",
+                "https://github.com/digininja/DVWA",
+                "https://github.com/OWASP/Vulnerable-Web-Application",
+                "https://github.com/opsxcq/docker-vulnerable-dvwa",
+                "https://github.com/incredibleindishell/CORS-vulnerable-Lab"
+            ],
+            "Rust": [
+                "https://github.com/FiroSolutions/vuln_rust"
+            ],
+            "Terraform": [
+                "https://github.com/bridgecrewio/terragoat",
+                "https://github.com/tenable/KaiMonkey",
+                "https://github.com/BishopFox/iam-vulnerable"
+            ]
+        },
+        "non_vulnerable": {
+            "C_CPP": [
+                "https://github.com/FLIF-hub/FLIF",
+                "https://github.com/milostosic/MTuner",
+                "https://github.com/acaudwell/Logstalgia",
+                "https://github.com/MrKepzie/Natron",
+                "https://github.com/chukong/quick-cocos2d-x",
+                "https://github.com/fossasia/neurolab-firmware"
+            ],
+            "CSharp": [
+                "https://github.com/Redth/PushSharp",
+                "https://github.com/zzzprojects/EntityFramework-Plus",
+                "https://github.com/tangxuehua/enode",
+                "https://github.com/NEventStore/NEventStore",
+                "https://github.com/Cn33liz/p0wnedShell",
+                "https://github.com/markrendle/Simple.Data",
+                "https://github.com/ScutGame/Scut"
+            ],
+            "Go": [
+                "https://github.com/koding/kite",
+                "https://github.com/progrium/localtunnel",
+                "https://github.com/ashleymcnamara/gophers",
+                "https://github.com/remind101/empire",
+                "https://github.com/docker/libchan",
+                "https://github.com/nlf/dlite",
+                "https://github.com/francoispqt/gojay",
+                "https://github.com/thedevsaddam/gojsonq",
+                "https://github.com/projectdiscovery/nuclei"
+            ],
+            "Java": [
+                "https://github.com/PuerkitoBio/gocrawl",
+                "https://github.com/zaproxy/zaproxy",
+                "https://github.com/springside/springside4",
+                "https://github.com/Tencent/GT",
+                "https://github.com/aporter/coursera-android",
+                "https://github.com/ryanhoo/StylishMusicPlayer",
+                "https://github.com/ragunathjawahar/android-saripaar"
+            ],
+            "Kotlin": [
+                "https://github.com/TakuSemba/MultiSnapRecyclerView"
+            ],
+            "JS_TS": [
+                "https://github.com/OWASP/threat-dragon"
+            ],
+            "Python": [
+                "https://github.com/jasperproject/jasper-client",
+                "https://github.com/jayfk/statuspage",
+                "https://github.com/awentzonline/image-analogies",
+                "https://github.com/IronLanguages/ironpython3",
+                "https://github.com/pallets/flask",
+                "https://github.com/django/django"
+            ],
+            "Ruby": [
+                "https://github.com/rails/rails",
+                "https://github.com/venmo/synx",
+                "https://github.com/sferik/t",
+                "https://github.com/trogdoro/xiki",
+                "https://github.com/pluginaweek/state_machine",
+                "https://github.com/nesquena/rabl",
+                "https://github.com/MiniProfiler/rack-mini-profiler",
+                "https://github.com/plusjade/jekyll-bootstrap"
+            ],
+            "Scala": [
+                "https://github.com/laurilehmijoki/s3_website",
+                "https://github.com/pocorall/scaloid",
+                "https://github.com/MojoJolo/textteaser",
+                "https://github.com/monix/monix",
+                "https://github.com/sryza/aas",
+                "https://github.com/rikvdkleij/intellij-haskell",
+                "https://github.com/twitter/rsc"
+            ],
+            "PHP": [
+                "https://github.com/WordPress/WordPress",
+                "https://github.com/laravel/laravel",
+                "https://github.com/joomla/joomla-cms",
+                "https://github.com/dnoegel/php-xdg-base-dir",
+                "https://github.com/chrisboulton/php-resque",
+                "https://github.com/Codiad/Codiad",
+                "https://github.com/consolidation/robo"
+            ],
+            "Rust": [
+                "https://github.com/tailhook/vagga",
+                "https://github.com/rustcc/RustPrimer",
+                "https://github.com/jonhoo/left-right",
+                "https://github.com/seppo0010/rsedis",
+                "https://github.com/zboxfs/zbox",
+                "https://github.com/mohanson/gameboy"
+            ],
+            "Terraform": [
+                "https://github.com/arminc/terraform-ecs",
+                "https://github.com/kz8s/tack",
+                "https://github.com/secdevops-cuse/CyberRange",
+                "https://github.com/turnerlabs/terraform-ecs-fargate",
+                "https://github.com/scarolan/ansible-terraform"
+            ]
+        }
+    }
+}
