@@ -1,3 +1,5 @@
+[![CodeQL](https://github.com/Perdiga/sast-benchmark/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Perdiga/sast-benchmark/actions/workflows/github-code-scanning/codeql)
+
 # SAST Benchmark
 
 **SAST Benchmark** is an open-source platform designed to compare and evaluate the effectiveness of various Static Application Security Testing (SAST) tools available in the industry. It includes support for free-to-use tools across multiple programming languages and frameworks, making it a versatile choice for security assessments.
