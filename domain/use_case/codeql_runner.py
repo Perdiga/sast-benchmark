@@ -48,7 +48,7 @@ class CodeQLRunner(SastRunner):
             f"-c \"mkdir -p {report_dir} "
             f"&& cd {project_directory} "
             f"&& codeql database create --language={code_ql_languages[language]} --threads=0 /tmp/database --overwrite "
-            f"&& codeql database analyze /tmp/database --threads=0 --format csv -o {report_dir}/report.csv\""
+            f"&& codeql database analyze /tmp/database --threads=0 --format sarifv2.1.0 -o {report_dir}/report.sarif\""
         )
     
     def run(self, configs) -> None:

@@ -2,10 +2,19 @@ from typing import Callable, Dict, List, Tuple
 from dataclasses import dataclass, asdict
 
 @dataclass
+class Runner:
+    modele_name: str
+    class_name: str
+    enabled: bool
+
+    def to_dict(self):
+        return asdict(self)
+
+@dataclass
 class Application:
     filter_languages: List[str]
     max_workers: int
-    runners: List[Tuple[str, str]] 
+    runners: Dict[str, dict]
 
     def to_dict(self):
         return asdict(self)
@@ -29,6 +38,18 @@ class AppConfig:
 
         self.repos.vulnerable = self._get_vulnerable_repos()
         self.repos.non_vulnerable = self._get_non_vulnerable_repos()
+        self.application.runners = self._get_runners()
+
+    def _get_runners(self) -> Dict[str, dict]:
+        """
+        Returns a dictionary of runners filtered by the 'enabled' attribute.
+        """
+        return {
+            runner["class_name"]: runner
+            for runner in self.application.runners
+            if runner.get("enabled", False)
+        }
+        
 
     def _get_vulnerable_repos(self) -> Dict[str, List[str]]:
         """
