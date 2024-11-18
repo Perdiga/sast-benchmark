@@ -42,14 +42,19 @@ class CodeQLRunner(SastRunner):
         project_directory = f"/src/{repo_directory}"
 
         # Run the CodeQL scan using Docker
-        os.system(
+        exit_code = os.system(
             f"docker run --rm -it --privileged "
             f"-v {current_directory}:/src:Z --entrypoint /bin/bash mcr.microsoft.com/cstsectools/codeql-container "
             f"-c \"mkdir -p {report_dir} "
             f"&& cd {project_directory} "
-            f"&& codeql database create --language={code_ql_languages[language]} --threads=0 /tmp/database --overwrite "
-            f"&& codeql database analyze /tmp/database --threads=0 --format sarifv2.1.0 -o {report_dir}/report.sarif\""
+            f"&& codeql database create  /tmp/database --language={code_ql_languages[language]} --overwrite "
+            f"&& codeql database analyze /tmp/database --format sarifv2.1.0 -o {report_dir}/report.sarif\""
         )
+
+        if exit_code == 0:
+            self.logger.info("Success when running codeql for {}".format(repo_directory))
+        else:
+            self.logger.error("Error when running codeql for {}".format(repo_directory))
     
     def run(self, configs) -> None:
         """

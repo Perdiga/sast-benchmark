@@ -40,10 +40,9 @@ class HorusecRunner(SastRunner):
         result = subprocess.run(command, capture_output=True, text=True)
 
         if result.returncode == 0:
-            self.logger.info(f"Horusec scan completed. Results saved to {report_dir}/report.sarif")
+            self.logger.info("Success when running horusec for {}".format(repo_directory))
         else:
-            self.logger.error(f"Horusec scan failed: {result.stderr}")
-            raise RuntimeError(f"Horusec scan failed: {result.stderr}")
+            self.logger.error("Error when running horusec for {}".format(repo_directory))
 
     def run(self, configs):
         for language in configs.repos.vulnerable:

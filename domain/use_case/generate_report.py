@@ -30,7 +30,7 @@ class SarifReportGenerator:
                 {% for vuln_status, tools in vulnerability_data.items() %}
                     <h4>{{ vuln_status | capitalize }}</h4>
                     {% for tool, findings in tools.items() %}
-                        <h5>Tool: {{ tool }}</h5>
+                        <h5>Tool: {{ tool }}. Number of findings:{{ findings | length }}</h5>
                         <ul>
                             {% for finding in findings %}
                                 <li class="issue">{{ finding }}</li>
@@ -55,7 +55,7 @@ class SarifReportGenerator:
 
     def parse_sarif_file(self, file_path):
         """Parse a SARIF file and extract findings."""
-        with open(file_path, 'r') as f:
+        with open(file_path, 'r', encoding='utf-8') as f:
             sarif_data = json.load(f)
 
         findings = []
@@ -65,10 +65,15 @@ class SarifReportGenerator:
             for result in results:
                 rule_id = result.get("ruleId", "N/A")
                 message = result.get("message", {}).get("text", "No message provided")
-                level = result.get("level", "N/A")
-                findings.append(f"[{level}] Rule {rule_id}: {message}")
+                if run['tool']['driver']['name'] == 'CodeQL':
+                    level = [rule for rule in run['tool']['driver']['rules'] if rule['id'] == rule_id][0].get("defaultConfiguration", {}).get("level", "N/A")
+                else: 
+                    level = result.get("level", "N/A")
+                location = result.get("locations", [{}])[0].get("physicalLocation", {}).get("artifactLocation", {}).get("uri", "N/A")
+                line = result.get("locations", [{}])[0].get("physicalLocation", {}).get("region", {}).get("startLine", "N/A")
+                findings.append(f"[{level}] Rule {rule_id}: {message} At {location} , Line {line}")
 
-        return findings
+        return sorted(findings)
 
     def generate_report(self):
         """Generate the HTML report from SARIF files."""
@@ -76,22 +81,23 @@ class SarifReportGenerator:
 
         # Walk through the directory structure
         for tool in os.listdir(self.base_dir):
-            tool_dir = os.path.join(self.base_dir, tool)
-            for vuln_status in os.listdir(tool_dir):  # "vulnerable" or "non_vulnerable"
-                vuln_dir = os.path.join(tool_dir, vuln_status)
-                for language in os.listdir(vuln_dir):
-                    lang_dir = os.path.join(vuln_dir, language)
-                    for repository in os.listdir(lang_dir):
-                        repo_dir = os.path.join(lang_dir, repository)
+            if os.path.isdir(os.path.join(self.base_dir, tool)):
+                tool_dir = os.path.join(self.base_dir, tool)
+                for vuln_status in os.listdir(tool_dir):  # "vulnerable" or "non_vulnerable"
+                    vuln_dir = os.path.join(tool_dir, vuln_status)
+                    for language in os.listdir(vuln_dir):
+                        lang_dir = os.path.join(vuln_dir, language)
+                        for repository in os.listdir(lang_dir):
+                            repo_dir = os.path.join(lang_dir, repository)
 
-                        # Parse SARIF files in the repository directory
-                        findings = []
-                        for file in os.listdir(repo_dir):
-                            if file.endswith(".sarif"):
-                                findings.extend(self.parse_sarif_file(os.path.join(repo_dir, file)))
+                            # Parse SARIF files in the repository directory
+                            findings = []
+                            for file in os.listdir(repo_dir):
+                                if file.endswith(".sarif"):
+                                    findings.extend(self.parse_sarif_file(os.path.join(repo_dir, file)))
 
-                        # Organize data
-                        data.setdefault(language, {}).setdefault(repository, {}).setdefault(vuln_status, {}).setdefault(tool, []).extend(findings)
+                            # Organize data
+                            data.setdefault(language, {}).setdefault(repository, {}).setdefault(vuln_status, {}).setdefault(tool, []).extend(findings)
 
         # Render HTML
         template = Template(self.HTML_TEMPLATE)
@@ -99,7 +105,7 @@ class SarifReportGenerator:
 
         # Save HTML report
         report_path = os.path.join(self.base_dir, "SARIF_Analysis_Report.html")
-        with open(report_path, 'w') as f:
+        with open(report_path, 'w', encoding='utf-8') as f:
             f.write(html_content)
 
         print(f"Report generated: {report_path}")

@@ -66,10 +66,9 @@ class TrivyRunner(SastRunner):
         )
 
         if result.returncode == 0:
-            self.logger.info(f"Trivy scan completed. Results saved to {report_dir}/trivy_report.sarif")
+            self.logger.info("Success when running trivy for {}".format(repo_directory))
         else:
-            self.logger.error(f"Trivy scan failed: {result.stderr}")
-            raise RuntimeError(f"Trivy scan failed: {result.stderr}")
+            self.logger.error("Error when running trivy for {}".format(repo_directory))
 
     def run(self, configs):
         """

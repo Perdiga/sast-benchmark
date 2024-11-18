@@ -210,7 +210,7 @@ class SonarQubeRunner(SastRunner):
         
         self.create_project(project_key, project_name)
 
-        os.system(
+        exit_code = os.system(
             f"docker run --rm --network host "
             f"-v {current_directory}:/src -w /src/{repo_directory} sonarsource/sonar-scanner-cli "
             f"-Dsonar.projectKey={project_key} "
@@ -220,7 +220,12 @@ class SonarQubeRunner(SastRunner):
             f"-Dsonar.password={self._ADMIN_PASS}"
         )
 
-        self.save_issues_to_csv(self.get_issues(project_key), report_dir)
+        if exit_code == 0:
+            self.logger.info("Success when running Sonarqube for {}".format(repo_directory))
+        else:
+            self.logger.error("Error when running Sonarqube for {}".format(repo_directory))
+
+        #self.save_issues_to_csv(self.get_issues(project_key), report_dir)
         self.save_issues_to_sarif(self.get_issues(project_key), report_dir)
 
     def run(self, configs) -> None:

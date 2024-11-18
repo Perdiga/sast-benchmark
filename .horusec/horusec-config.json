@@ -10,7 +10,8 @@
       "**/tmp/**",
       "**/bin/**",
       "**/internal/services/engines/**",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "**/*.spec.*"
     ],
     "horusecCliToolsConfig": {
       "Bandit": {
