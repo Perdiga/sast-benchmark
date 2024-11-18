@@ -1,7 +1,7 @@
 {
     "application": {
-        "filter_languages": ["JS_TS"],
-        "max_workers": 5,
+        "filter_languages": ["JS_TS", "Python", "Java","Kotlin","CSharp"],
+        "max_workers": 3,
         "runners":[ 
             {
                 "module_name": "domain.use_case.horusec_runner",
@@ -24,7 +24,7 @@
                 "enabled": true
             }
         ]
-    },    
+    },   
     "repos": {
         "vulnerable": {
             "C_CPP": [
