@@ -4,16 +4,24 @@
         "max_workers": 5,
         "runners":[ 
             {
+                "module_name": "domain.use_case.horusec_runner",
+                "class_name": "HorusecRunner",
+                "enabled": true
+            },
+            {
                 "module_name": "domain.use_case.sonarqube_runner",
-                "class_name": "SonarQubeRunner"
+                "class_name": "SonarQubeRunner",
+                "enabled": true
             },
             {
                 "module_name": "domain.use_case.trivy_runner",
-                "class_name": "TrivyRunner"
+                "class_name": "TrivyRunner",
+                "enabled": true
             },
             {
                 "module_name": "domain.use_case.codeql_runner",
-                "class_name": "CodeQLRunner"
+                "class_name": "CodeQLRunner",
+                "enabled": true
             }
         ]
     },    
