@@ -26,6 +26,8 @@ Runners are located in the `domain/use_case` folder. Each runner is responsible 
 
 Scan results from each tool are saved in the `scan_results` folder for easy access and analysis.
 
+After running all tools, it will be genarete a `SARIF_Analysis_Report` file with all scan to facilitate the analysis.
+
 ---
 
 ## Configuration
