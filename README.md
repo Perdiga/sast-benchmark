@@ -21,12 +21,15 @@ Runners are located in the `domain/use_case` folder. Each runner is responsible 
 |SonarQube  |ABAP, C#, C/C++, CloudFormation, COBOL, CSS, Docker, Flex, Go, HMTL, Java, JavaScript, Kotlin, Kubernetes/Helm, Objective-C, PHP, PLI, PLSQL, Python, Ruby, Scala, Secrets, Swift, Terraform, TSQL, TypeScript, VB.NET, XML|[SonarQube Overview](https://docs.sonarsource.com/sonarqube/10.5/analyzing-source-code/languages/overview/)
 |Trivy      |.Net, C/C++, Dart, Elixir, Go, Java, JavaScript, PHP, Python, Ruby, Rust, Swift| [Trivy Overview](https://aquasecurity.github.io/trivy/v0.47/docs/coverage/language/)
 |Horusec    | C/C++, C#, Dart, Elixit, Go, HMTL, Java, JavaScript, JSON, Kotlin, Kubernetes, Leeks, Nginx, PHP, Python, Ruby, Swift, Teraform, TypeScript | [Horusec Overview](https://docs.horusec.io/docs/cli/analysis-tools/overview/)
+|Semgrep    | C/C++, C#, Go, Java, JavaScript, JSX, Kotlin, PHP, Python, Ruby, Rust, Scala, Swift, Terraform, TypeScript | [Semgrep Overview](https://semgrep.dev/docs/supported-languages/)
 
 ---
 
 ## Results
 
 Scan results from each tool are saved in the `scan_results` folder for easy access and analysis.
+
+After running all tools, it will be genarete a `SARIF_Analysis_Report` file with all scan to facilitate the analysis.
 
 ---
 

@@ -1,26 +1,31 @@
 {
     "application": {
-        "filter_languages": ["JS_TS", "Python", "Java","Kotlin","CSharp"],
+        "filter_languages": ["PHP"],
         "max_workers": 3,
         "runners":[ 
             {
                 "module_name": "domain.use_case.horusec_runner",
                 "class_name": "HorusecRunner",
-                "enabled": true
+                "enabled": false
             },
             {
                 "module_name": "domain.use_case.sonarqube_runner",
                 "class_name": "SonarQubeRunner",
-                "enabled": true
+                "enabled": false
             },
             {
                 "module_name": "domain.use_case.trivy_runner",
                 "class_name": "TrivyRunner",
-                "enabled": true
+                "enabled": false
             },
             {
                 "module_name": "domain.use_case.codeql_runner",
                 "class_name": "CodeQLRunner",
+                "enabled": false
+            },
+            {
+                "module_name": "domain.use_case.semgrep_runner",
+                "class_name": "SemgrepRunner",
                 "enabled": true
             }
         ]
@@ -94,7 +99,7 @@
                 "https://github.com/digininja/DVWA",
                 "https://github.com/OWASP/Vulnerable-Web-Application",
                 "https://github.com/opsxcq/docker-vulnerable-dvwa",
-                "https://github.com/incredibleindishell/CORS-vulnerable-Lab"
+                "https://github.com/incredibleindishell/CORS-vulnerable-Lab"   
             ],
             "Rust": [
                 "https://github.com/FiroSolutions/vuln_rust"
