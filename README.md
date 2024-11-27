@@ -20,7 +20,9 @@ Runners are located in the `domain/use_case` folder. Each runner is responsible 
 |Trivy      |.Net, C/C++, Dart, Elixir, Go, Java, JavaScript, PHP, Python, Ruby, Rust, Swift| [Trivy Overview](https://aquasecurity.github.io/trivy/v0.47/docs/coverage/language/)
 |Horusec    | C/C++, C#, Dart, Elixit, Go, HMTL, Java, JavaScript, JSON, Kotlin, Kubernetes, Leeks, Nginx, PHP, Python, Ruby, Swift, Teraform, TypeScript | [Horusec Overview](https://docs.horusec.io/docs/cli/analysis-tools/overview/)
 |Semgrep    | C/C++, C#, Go, Java, JavaScript, JSX, Kotlin, PHP, Python, Ruby, Rust, Scala, Swift, Terraform, TypeScript | [Semgrep Overview](https://semgrep.dev/docs/supported-languages/)
+|Snky       | C#, Go, Java, JavaScript, Kotlin, PHP, Python, Ruby,  TypeScript * | [Snky Overview](https://docs.snyk.io/supported-languages-package-managers-and-frameworks/)
 
+* Not all Snky languages are implemented on this tool
 ---
 
 ## Results
