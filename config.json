@@ -1,6 +1,6 @@
 {
     "application": {
-        "filter_languages": ["PHP"],
+        "filter_languages": ["CSharp","Java","Kotlin","Go"],
         "max_workers": 3,
         "runners":[ 
             {
@@ -26,6 +26,11 @@
             {
                 "module_name": "domain.use_case.semgrep_runner",
                 "class_name": "SemgrepRunner",
+                "enabled": false
+            },
+            {
+                "module_name": "domain.use_case.snyk_runner",
+                "class_name": "SnykRunner",
                 "enabled": true
             }
         ]
