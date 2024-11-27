@@ -1,7 +1,4 @@
 import os
-import subprocess
-import tarfile
-import shutil
 from domain.interface.sast_runner import SastRunner
 
 class SnykRunner(SastRunner):
@@ -9,7 +6,7 @@ class SnykRunner(SastRunner):
         self.logger = logger
         self.process_manager = process_manager
 
-    def run_snyk_scan(self, vulnerable, language, address):
+    def run_snyk_scan(self, vulnerable, language, address, snyk_token):
         """
         Run Snyk scan on the specified repository and save the results to a report directory.
         
@@ -37,16 +34,29 @@ class SnykRunner(SastRunner):
             "PHP": "snyk/snyk:php",    
         }
 
-        if snyk_image_map[language]:
+        # commands = {
+        #     "JS_TS": ["npm install"],  # or "yarn install"
+        #     "Python": ["pip install -r requirements.txt"],
+        #     "Java": ["mvn install"],
+        #     "Kotlin": ["./gradlew build"],
+        #     "Go": ["go mod tidy"],
+        #     "Ruby": ["bundle install"],
+        #     "PHP": ["composer install"],
+        #     "Terraform": ["terraform init"],
+        # }
+
+        # subprocess.run(commands.get(language), cwd=repo_directory, check=True, shell=True)
+
+        if snyk_image_map.get(language):
             exit_code = os.system(
                 f"docker run --rm --privileged "
-                f"--env SNYK_TOKEN=<your api> "
+                f"--env SNYK_TOKEN={snyk_token} "
                 f"-v {repo_directory}:/app "
                 f"-v {report_dir}:/app/report "
-                f"{snyk_image_map[language]} snyk test --sarif-file-output=/app/report/result.sarif"
+                f"{snyk_image_map.get(language)} snyk test --ignore-policy --sarif-file-output=/app/report/result.sarif"
             )
 
-            if exit_code == 0:
+            if exit_code == 0 || exit_code == 1:
                 self.logger.info("Success when running Snyk for {}".format(repo_directory))
             else:
                 self.logger.error("Error when running Snyk for {}".format(repo_directory))
@@ -64,12 +74,12 @@ class SnykRunner(SastRunner):
             self.logger.info("Running Snyk for language {}".format(language))
             for repository in configs.repos.vulnerable[language]:
                 self.logger.info("Running Snyk for repository: {}".format(repository))
-                self.process_manager.add_worker(self.run_snyk_scan, (True, language, repository))
+                self.process_manager.add_worker(self.run_snyk_scan, (True, language, repository,configs.snyk_token))
 
         for language in configs.repos.non_vulnerable:
             self.logger.info("Running Snyk for language {}".format(language))
             for repository in configs.repos.non_vulnerable[language]:
                 self.logger.info("Running Snyk for repository: {}".format(repository))
-                self.process_manager.add_worker(self.run_snyk_scan, (False, language, repository))
+                self.process_manager.add_worker(self.run_snyk_scan, (False, language, repository,configs.snyk_token))
 
         self.process_manager.wait_for_all()

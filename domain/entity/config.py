@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from typing import Callable, Dict, List, Tuple
 from dataclasses import dataclass, asdict
 
@@ -15,6 +17,8 @@ class Application:
     filter_languages: List[str]
     max_workers: int
     runners: Dict[str, dict]
+
+    snyk_token = None
 
     def to_dict(self):
         return asdict(self)
@@ -35,6 +39,12 @@ class AppConfig:
     def __init__(self, json_data: Dict):
         self.application = Application(**json_data.get("application", {}))
         self.repos = Repos(**json_data.get("repos", {}))
+
+        # Load environment variables from the .env file
+        load_dotenv()
+
+        # Retrieve the token
+        self.snyk_token = os.getenv("SNYK_TOKEN")
 
         self.repos.vulnerable = self._get_vulnerable_repos()
         self.repos.non_vulnerable = self._get_non_vulnerable_repos()

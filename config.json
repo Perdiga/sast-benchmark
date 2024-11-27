@@ -1,6 +1,6 @@
 {
     "application": {
-        "filter_languages": ["PHP"],
+        "filter_languages": ["CSharp","Java","Kotlin","Go"],
         "max_workers": 3,
         "runners":[ 
             {
