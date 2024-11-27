@@ -40,7 +40,7 @@ class SnykRunner(SastRunner):
         if snyk_image_map[language]:
             exit_code = os.system(
                 f"docker run --rm --privileged "
-                f"--env SNYK_TOKEN=bc8f1c9c-b42b-4dfa-bc03-48434db700c5 "
+                f"--env SNYK_TOKEN=<your api> "
                 f"-v {repo_directory}:/app "
                 f"-v {report_dir}:/app/report "
                 f"{snyk_image_map[language]} snyk test --sarif-file-output=/app/report/result.sarif"
