@@ -56,7 +56,7 @@ class SnykRunner(SastRunner):
                 f"{snyk_image_map.get(language)} snyk test --ignore-policy --sarif-file-output=/app/report/result.sarif"
             )
 
-            if exit_code == 0 || exit_code == 1:
+            if exit_code == 0 or exit_code == 1:
                 self.logger.info("Success when running Snyk for {}".format(repo_directory))
             else:
                 self.logger.error("Error when running Snyk for {}".format(repo_directory))
