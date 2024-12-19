@@ -24,7 +24,7 @@ Runners are located in the `domain/use_case` folder. Each runner is responsible 
 |Semgrep    | C/C++, C#, Go, Java, JavaScript, JSX, Kotlin, PHP, Python, Ruby, Rust, Scala, Swift, Terraform, TypeScript | [Semgrep Overview](https://semgrep.dev/docs/supported-languages/)
 |Snyk       | C#, Go, Java, JavaScript, Kotlin, PHP, Python, Ruby,  TypeScript * | [Snyk Overview](https://docs.snyk.io/supported-languages-package-managers-and-frameworks/)
 
-* Not all Snky languages are implemented on this tool
+* Not all Snyk languages are implemented on this tool
 ---
 
 ## Results
